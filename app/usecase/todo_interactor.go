@@ -34,7 +34,7 @@ func (interactor *TodoInteractor) Edit(t domain.Todo) (todo domain.Todo, err err
 	return
 }
 
-func (interactor *TodoInteractor)	Delete(id int) (err error) {
+func (interactor *TodoInteractor) Delete(id int) (err error) {
 	err = interactor.TodoRepository.Delete(id)
 	if err != nil {
 		return

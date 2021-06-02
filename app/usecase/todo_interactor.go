@@ -13,10 +13,11 @@ func (interactor *TodoInteractor) Todos() (todo domain.Todos, err error) {
 
 func (interactor *TodoInteractor) TodoById(identifier int) (todo domain.Todo, err error) {
 	todo, err = interactor.TodoRepository.FindById(identifier)
+	return
 }
 
 func (interactor *TodoInteractor) Add(t domain.Todo) (todo domain.Todo, err error) {
-	identifier, err = interactor.TodoRepository.Store(t)
+	identifier, err := interactor.TodoRepository.Store(t)
 	if err != nil {
 		return
 	}

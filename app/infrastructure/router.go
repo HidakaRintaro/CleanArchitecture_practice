@@ -9,7 +9,17 @@ import (
 var Router *gin.Engine
 
 func init()  {
-	r := gin.Default( 
-		
-	)
+	r := gin.Default()
+
+	r.Use(cors.Default())
+
+	todoController := controllers.NewTodoController(NewSqlHandler())
+
+	r.GET("/api/v1/todos", func(c *gin.Context) { todoController.Index(c) })
+	r.GET("/api/v1/todos/:id", func(c *gin.Context) { todoController.Show(c) })
+	r.POST("/api/v1/todos", func(c *gin.Context) { todoController.Create(c) })
+	r.PUT("/api/v1/todos/:id", func(c *gin.Context) { todoController.Update(c) })
+	r.DELETE("/api/v1/todos/:id", func(c *gin.Context) { todoController.Destroy(c) })
+
+	Router = r
 }
